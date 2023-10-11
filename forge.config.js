@@ -2,7 +2,8 @@ module.exports = {
   packagerConfig: {
     asar: true,
     "extraResource": [
-      "build"
+      "build",
+      "lib"
     ],
     win32metadata: {
       "requested-execution-level": "requireAdministrator"
