@@ -49,7 +49,6 @@ const createWindow = () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-    ipcMain.handle('cpufan', () => GetCpuFanSpeed())
     createWindow()
 
     app.on('activate', () => {
@@ -78,3 +77,9 @@ function GetCpuFanSpeed() {
     const Speed = SioSdk.GetCpuFanSpeed();
     return Speed;
 }
+
+ipcMain.on('call-cpu-fan-speed', (event) => {
+    const webContents = event.sender;
+    const Speed = GetCpuFanSpeed();
+    webContents.send('update-cpu-fan-speed', Speed);
+})
